@@ -101,20 +101,13 @@ def input="""104
 145"""
 
 array = input.split("\n").collect { it as int }
-array.add(0)
-array.add(array.max() + 3)
-array=array.sort()
+array = (array + 0 + (array.max() + 3)).sort()
+
 diffs= ((0..array.size() - 2).collect { array[it + 1]-array[it] })
-//println(array)
-//println(diffs)
 
 vier = (0..diffs.size() - 4).collect { diffs[it..it+3] }.stream().filter { it.every{it == 1} }.count() 
 drei = (0..diffs.size() - 3).collect { diffs[it..it+2] }.stream().filter { it.every{it == 1} }.count() - 2 * vier
 zwei = (0..diffs.size() - 2).collect { diffs[it..it+1] }.stream().filter { it.every{it == 1} }.count() - 3 * vier - 2 * drei
-//println array
-//println vier
-//println drei
-//println zwei
 
 println ((2 as BigInteger) ** zwei * 4 ** drei * 7 ** vier )
 
